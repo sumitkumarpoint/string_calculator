@@ -8,7 +8,11 @@ class StringCalculator
     # Custom delimiter
     if numbers.start_with?('//')
       delimiter_section, num_string = numbers.split("\n", 2)
-
+      p '==================='
+      p numbers
+      p delimiter_section
+      p num_string
+      p '==================='
       if delimiter_section.match(/\[.*\]/)
         # Multiple or multi-character delimiters
         delimiters = delimiter_section.scan(/\[(.*?)\]/).flatten
