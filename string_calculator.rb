@@ -5,8 +5,8 @@ class StringCalculator
 
     delimiter, numbers = extract_delimiter(numbers)
 
-    numbers = numbers.gsub('\n', delimiter)
-    nums = numbers.split(delimiter).map(&:to_i)
+    pattern = Regexp.union(delimiter)
+    nums = numbers.split(pattern).map(&:to_i)
 
     validate_negatives(nums)
 
@@ -14,10 +14,14 @@ class StringCalculator
   end
 
   def self.extract_delimiter(numbers)
-    return [',', numbers] unless numbers.start_with?('//')
+    return [[',', '\n'], numbers] unless numbers.start_with?('//')
 
-    parts = numbers.split("\n")
-    [parts[0][2], parts[1]]
+    header, numbers = numbers.split('\n', 2)
+
+    delimiters = header.scan(/\[(.*?)\]/).flatten
+    delimiters = [header[2..]] if delimiters.empty?
+
+    [delimiters, numbers]
   end
 
   def self.validate_negatives(nums)
