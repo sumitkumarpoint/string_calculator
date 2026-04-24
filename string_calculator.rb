@@ -7,7 +7,7 @@ class StringCalculator
 
     pattern = Regexp.union(delimiter)
     nums = numbers.split(pattern).map(&:to_i)
-
+    nums.select! { |n| n <= 1000 }
     validate_negatives(nums)
 
     nums.sum
