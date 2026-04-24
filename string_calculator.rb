@@ -1,16 +1,20 @@
 # string_calculator.rb
 class StringCalculator
   def self.add(numbers)
-    return 0 if numbers.empty?
+    return 0 if numbers.strip.empty?
 
     delimiter, numbers = extract_delimiter(numbers)
-
+    numbers = normalize_input(numbers)
     pattern = Regexp.union(delimiter)
     nums = numbers.split(pattern).map(&:to_i)
     nums.select! { |n| n <= 1000 }
     validate_negatives(nums)
 
     nums.sum
+  end
+
+  def self.normalize_input(numbers)
+    numbers.strip.gsub(' ', '')
   end
 
   def self.extract_delimiter(nums)
