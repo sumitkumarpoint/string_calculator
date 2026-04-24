@@ -14,9 +14,9 @@ class StringCalculator
   end
 
   def self.extract_delimiter(numbers)
-    return [[',', '\n'], numbers] unless numbers.start_with?('//')
+    return [[',', "\n"], numbers] unless numbers.start_with?('//')
 
-    header, numbers = numbers.split('\n', 2)
+    header, numbers = numbers.split("\n", 2)
 
     delimiters = header.scan(/\[(.*?)\]/).flatten
     delimiters = [header[2..]] if delimiters.empty?
