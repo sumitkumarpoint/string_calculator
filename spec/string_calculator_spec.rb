@@ -43,4 +43,16 @@ RSpec.describe StringCalculator do
   it 'Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2' do
     expect(StringCalculator.add("//[***]\n2***1001")).to eq(2)
   end
+
+  it 'raises error for leading delimiter' do
+    expect {
+      described_class.add(",1,2")
+    }.to raise_error(ArgumentError)
+  end
+
+  it 'raises error for leading delimiter' do
+    expect {
+      described_class.add("1,,2")
+    }.to raise_error(ArgumentError)
+  end
 end

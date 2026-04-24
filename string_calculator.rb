@@ -6,11 +6,17 @@ class StringCalculator
     delimiter, numbers = extract_delimiter(numbers)
     numbers = normalize_input(numbers)
     pattern = Regexp.union(delimiter)
-    nums = numbers.split(pattern).map(&:to_i)
+    parts = numbers.split(pattern)
+    validate_format(parts)
+    nums = parts.map(&:to_i)
     nums.select! { |n| n <= 1000 }
     validate_negatives(nums)
 
     nums.sum
+  end
+
+  def self.validate_format(parts)
+    raise ArgumentError, "Invalid input format" if parts.any?(&:empty?)
   end
 
   def self.normalize_input(numbers)
