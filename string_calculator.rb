@@ -13,10 +13,10 @@ class StringCalculator
     nums.sum
   end
 
-  def self.extract_delimiter(numbers)
-    return [[',', "\n"], numbers] unless numbers.start_with?('//')
+  def self.extract_delimiter(nums)
+    return [[',', "\n"], nums] unless nums.start_with?('//')
 
-    header, numbers = numbers.split("\n", 2)
+    header, numbers = nums.split("\n", 2)
 
     delimiters = header.scan(/\[(.*?)\]/).flatten
     delimiters = [header[2..]] if delimiters.empty?
